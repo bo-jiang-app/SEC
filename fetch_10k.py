@@ -22,7 +22,7 @@ import re
 import shutil
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Optional
 
 import requests
@@ -187,7 +187,7 @@ def run_for_company(name: str, cik: str, output_dir: str, session: requests.Sess
 
     ensure_dir(output_dir)
     slug = company_slug(name)
-    ts = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     html_fn = f"{slug}-{accession.replace('-', '')}-{ts}.html"
     pdf_fn = f"{slug}-{accession.replace('-', '')}-{ts}.pdf"
 
